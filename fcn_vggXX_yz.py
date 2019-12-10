@@ -30,6 +30,8 @@ print("keras version {}".format(keras.__version__))#; del keras
 def FCN8(nClasses, input_height, input_width, vgg_n, tl):
     ## input_height and width must be devisible by 32 because maxpooling with filter size = (2,2) is operated 5 times,
     ## which makes the input_height and width 2^5 = 32 times smaller
+	## vgg debe ser entero igual a 16 o 19
+	## tl=1 para activar transfer learning y cargar pesos codificador vgg entrenados con Imagenet para clasificación
     assert input_height%32 == 0
     assert input_width%32 == 0
     
@@ -181,6 +183,9 @@ def give_color_to_seg_img(seg,n_classes):
 #conf=[['c',0,16],['c',1,16],['c',2,16],['c',0,19],['c',1,19],['c',2,19],['nc',0,16],['nc',1,16],['nc',2,16],['nc',0,19],['nc',1,19],['c',2,19]]
 #conf=[['c',16,'tl'],['nc',16,'tl'],['c',19,'tl'],['nc',19,'tl'],['c',16,'f0'],['nc',16,'f0'],['c',19,'f0'],['nc',19,'f0']]
 conf=[['c',16,'tl'],['c',19,'tl'],['c',16,'f0'],['c',19,'f0']]
+## tl es transfer learning
+## f0 es desde cero
+## 
 for i in range(3,4):
     modo=conf[i][0]
 #    tn_stage=conf[i][1]
